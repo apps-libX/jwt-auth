@@ -1,0 +1,42 @@
+{
+    "name"              : "apps-libX/jwt_auth",
+    "description"       : "Description jwt_auth",
+    "keywords"          : [
+        "apps-libX",
+        "jwt_auth"
+    ],
+    "homepage"          : "https://github.com/apps-libX/jwt_auth",
+    "license"           : "MIT",
+    "authors"           : [
+        {
+            "name"     : "anonymoussc",
+            "email"    : "50c5ac69@opayq.com",
+            "homepage" : "http://anonymoussc.github.io/",
+            "role"     : "Developer"
+        }
+    ],
+    "require"           : {
+        "php"                  : ">=5.4.0",
+        "illuminate/support"   : "5.1.*",
+        "illuminate/contracts" : "5.1.*"
+    },
+    "require-dev"       : {
+        "phpunit/phpunit"    : "4.*",
+        "scrutinizer/ocular" : "~1.1"
+    },
+    "autoload"          : {
+        "classmap" : [
+            "src/seeds",
+            "src/controllers"
+        ],
+        "psr-4"    : {
+            "AppsLibX\\JwtAuth\\" : "src"
+        }
+    },
+    "autoload-dev"      : {
+        "psr-4" : {
+            "AppsLibX\\JwtAuth\\Test\\" : "tests"
+        }
+    },
+    "minimum-stability" : "stable"
+}
