@@ -16,9 +16,12 @@
     }
   ],
   "require"          : {
-    "php"                 : ">=5.5.9",
-    "illuminate/support"  : "5.1.*@dev",
-    "illuminate/contracts": "5.1.*@dev"
+    "php"                        : ">=5.5.9",
+    "illuminate/support"         : "5.1.*@dev",
+    "illuminate/contracts"       : "5.1.*@dev",
+    "firebase/php-jwt"           : "~2.0",
+    "guzzlehttp/guzzle"          : "5.2.0",
+    "guzzlehttp/oauth-subscriber": "0.2.0"
   },
   "require-dev"      : {
     "phpunit/phpunit"   : "4.*",
@@ -26,8 +29,9 @@
   },
   "autoload"         : {
     "classmap": [
-      "src/seeds",
-      "src/controllers"
+      "databases/seeds",
+      "src/controllers",
+      "tests"
     ],
     "psr-4"   : {
       "AppsLibX\\JwtAuth\\": "src"
