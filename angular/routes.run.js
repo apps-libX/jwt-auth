@@ -1,6 +1,7 @@
 /**
  * Created by anonymoussc on 04/12/15 9:11.
  */
+/*
 
 (function() {
     'use strict';
@@ -21,3 +22,4 @@
     });
 })();
 
+*/
