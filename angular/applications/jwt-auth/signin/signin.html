@@ -1,0 +1,24 @@
+<md-content flex layout-padding>
+    <div layout="row" layout-wrap>
+        <div flex="30" hide-sm hide-md></div>
+        <div flex="auto">
+            <form>
+                <p class="" ng-if="auth.loginError"><strong>Error:</strong> {{auth.loginErrorText}}</p>
+                <md-input-container>
+                    <label for="email">Email</label>
+                    <input type="email" id="email" ng-model="signin.email" md-autofocus>
+                </md-input-container>
+                <md-input-container>
+                    <label for="password">Password</label>
+                    <input type="password" id="password" ng-model="signin.password">
+                </md-input-container>
+                <div layout="row" layout-align="end center">
+                    <md-button ng-click="signin.login()" class="md-raised md-primary md-hue-3">
+                        Sign-in
+                    </md-button>
+                </div>
+            </form>
+        </div>
+        <div flex="25" hide-sm hide-md></div>
+    </div>
+</md-content>
