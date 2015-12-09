@@ -7,10 +7,9 @@
 
     angular
         .module('jwtAuth', [
-            /* Shared modules */
-            'app.core',
-            'app.widgets'
-            /*----------------*/
+            /* Shared */
+            'main',
+            'widgets'
         ]);
 
 })();
