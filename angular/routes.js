@@ -107,9 +107,9 @@
             clientId: 'qhc3lft06xipnmndydcr3wau939a20z'
         });
 
-        $authProvider.bitbucket({
+        /*$authProvider.bitbucket({
             clientId: '48UepjQDYaZFuMWaDj'
-        });
+        });*/
 
         $authProvider.oauth2({
             name                 : 'foursquare',
