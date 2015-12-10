@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('components.controllers')
+        .module('jwtAuth')
         .controller('LoginController', LoginController);
 
     LoginController.$inject = [];
