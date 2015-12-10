@@ -13,7 +13,7 @@
 
     /* @ngInject */
     function config($stateProvider, $urlRouterProvider, $authProvider, $httpProvider, $provide) {
-        // $urlRouterProvider.otherwise('/');
+        $urlRouterProvider.otherwise('/');
 
         $stateProvider
             .state('jwtauth', {
