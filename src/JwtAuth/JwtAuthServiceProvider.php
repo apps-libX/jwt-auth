@@ -1,4 +1,4 @@
-<?php namespace JwtAuth;
+<?php namespace AppsLibX\JwtAuth;
 
 use Illuminate\Support\ServiceProvider;
 
