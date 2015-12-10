@@ -2,7 +2,7 @@
  * Created by anonymous on 08/12/15 10:48.
  */
 
-(function() {
+/*(function() {
     'use strict';
 
     angular
@@ -11,7 +11,7 @@
 
     accountService.$inject = ['$http'];
 
-    /* @ngInject */
+    /!* @ngInject *!/
     function accountService($http) {
         var service;
 
@@ -33,5 +33,16 @@
         }
     }
 
-})();
+})();*/
 
+angular.module('jwtAuth')
+    .factory('Account', function($http) {
+        return {
+            getProfile: function() {
+                return $http.get('/api/me');
+            },
+            updateProfile: function(profileData) {
+                return $http.put('/api/me', profileData);
+            }
+        };
+    });
