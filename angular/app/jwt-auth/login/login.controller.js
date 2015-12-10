@@ -9,7 +9,7 @@
         .module('components.controllers')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = [''];
+    LoginController.$inject = [];
 
     /* @ngInject */
     function LoginController() {

@@ -5,10 +5,15 @@
 (function() {
     'use strict';
 
-    angular.module('jwtAuth').config(function($stateProvider, $urlRouterProvider, $authProvider, $httpProvider, $provide) {
-        // $provide.factory('redirectWhenLoggedOut', redirectWhenLoggedOut);
-        // $httpProvider.interceptors.push('redirectWhenLoggedOut');
-        $urlRouterProvider.otherwise('/');
+    angular
+        .module('jwtAuth')
+        .config(config);
+
+    config.$inject = ['$stateProvider', '$urlRouterProvider', '$authProvider', '$httpProvider', '$provide'];
+
+    /* @ngInject */
+    function config($stateProvider, $urlRouterProvider, $authProvider, $httpProvider, $provide) {
+        // $urlRouterProvider.otherwise('/');
 
         $stateProvider
             .state('jwtauth', {
@@ -23,22 +28,22 @@
                     'header@jwtauth': {
                         templateUrl : view('jwt-auth.header'),
                         controller  : 'JwtAuthHeaderController',
-                        controllerAs: 'jwtAuthHeader'
+                        controllerAs: 'header'
                     },
                     'left@jwtauth'  : {
                         templateUrl : view('jwt-auth.left'),
                         controller  : 'JwtAuthLeftController',
-                        controllerAs: 'jwtAuthLeft'
+                        controllerAs: 'left'
                     },
                     'right@jwtauth' : {
                         templateUrl : view('jwt-auth.right'),
                         controller  : 'JwtAuthRightController',
-                        controllerAs: 'jwtAuthRight'
+                        controllerAs: 'right'
                     },
                     'footer@jwtauth': {
                         templateUrl : view('jwt-auth.footer'),
                         controller  : 'JwtAuthFooterController',
-                        controllerAs: 'jwtAuthFooter'
+                        controllerAs: 'footer'
                     },
                     'main@jwtauth'  : {}
                 }
@@ -61,7 +66,7 @@
                     'main@jwtauth': {
                         templateUrl : view('jwt-auth.home'),
                         controller  : 'JwtAuthHomeController',
-                        controllerAs: 'jwtAuthHome'
+                        controllerAs: 'home'
                     }
                 }
             });
@@ -180,30 +185,7 @@
                 return 'home';
             }
         }
+    }
 
-        /*
-         function redirectWhenLoggedOut($q, $injector) {
-
-         return {
-
-         responseError: function(rejection) {
-         var
-         $state           = $injector.get('$state'),
-         rejectionReasons = ['token_not_provided', 'token_expired', 'token_absent', 'token_invalid'];
-
-         angular.forEach(rejectionReasons, function(value, key) {
-
-         if (rejection.data.error === value) {
-         localStorage.removeItem('user');
-         $state.go('jwtauth.signin');
-         }
-         });
-
-         return $q.reject(rejection);
-         }
-         };
-         }
-         */
-
-    });
 })();
+

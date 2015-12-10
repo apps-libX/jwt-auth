@@ -1,8 +1,8 @@
 /**
- * Created by anonymous on 04/12/15 9:11.
+ * Created by anonymous on 10/12/15 10:29.
  */
-/*
 
+/*
 (function() {
     'use strict';
 
@@ -21,5 +21,4 @@
         });
     });
 })();
-
 */
