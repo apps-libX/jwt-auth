@@ -13,7 +13,7 @@
 
     /* @ngInject */
     function config($stateProvider, $urlRouterProvider, $authProvider, $httpProvider, $provide) {
-        //$urlRouterProvider.otherwise('/');
+        $urlRouterProvider.otherwise('/');
 
         $stateProvider
             .state('jwtauth', {
@@ -60,47 +60,53 @@
                 }
             })
             /*.state('jwtauth.home', {
-                url  : '/home',
-                data : { pageName: 'Home' },
-                views: {
-                    'main@jwtauth': {
-                        templateUrl : view('jwt-auth.home'),
-                        controller  : 'JwtAuthHomeController',
-                        controllerAs: 'home'
-                    }
-                }
-            })*/
-            .state('home', {
-                url: '/home',
-                controller: 'HomeCtrl',
+             url  : '/home',
+             data : { pageName: 'Home' },
+             views: {
+             'main@jwtauth': {
+             templateUrl : view('jwt-auth.home'),
+             controller  : 'JwtAuthHomeController',
+             controllerAs: 'home'
+             }
+             }
+             })*/
+            .state('jwtauth.home', {
+                url        : '/home',
+                controller : 'HomeCtrl',
                 templateUrl: view('jwt-auth.home')
             })
-            .state('login', {
-                url: '/login',
+            .state('jwtauth.login', {
+                url        : '/login',
                 templateUrl: view('jwt-auth.login'),
-                controller: 'LoginCtrl',
+                controller : 'LoginCtrl',
+                resolve    : {
+                    skipIfLoggedIn: skipIfLoggedIn
+                }
+            })
+            .state('jwtauth.signup', {
+                url    : '/signup',
+                data   : { pageName: 'Sign-up' },
+                views  : {
+                    'main@jwtauth': {
+                        templateUrl : view('jwt-auth.signup'),
+                        controller  : 'SignupController',
+                        controllerAs: 'signup'
+                    }
+                },
                 resolve: {
                     skipIfLoggedIn: skipIfLoggedIn
                 }
             })
-            .state('signup', {
-                url: '/signup',
-                templateUrl: view('jwt-auth.signup'),
-                controller: 'SignupCtrl',
-                resolve: {
-                    skipIfLoggedIn: skipIfLoggedIn
-                }
-            })
-            .state('logout', {
-                url: '/logout',
-                template: null,
+            .state('jwtauth.logout', {
+                url       : '/logout',
+                template  : null,
                 controller: 'LogoutCtrl'
             })
-            .state('profile', {
-                url: '/profile',
+            .state('jwtauth.profile', {
+                url        : '/profile',
                 templateUrl: view('jwt-auth.profile'),
-                controller: 'ProfileCtrl',
-                resolve: {
+                controller : 'ProfileCtrl',
+                resolve    : {
                     loginRequired: loginRequired
                 }
             });
@@ -142,8 +148,8 @@
         });
 
         /*$authProvider.bitbucket({
-            clientId: '48UepjQDYaZFuMWaDj'
-        });*/
+         clientId: '48UepjQDYaZFuMWaDj'
+         });*/
 
         $authProvider.oauth2({
             name                 : 'foursquare',
