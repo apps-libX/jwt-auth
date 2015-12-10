@@ -13,7 +13,7 @@
 
     /* @ngInject */
     function config($stateProvider, $urlRouterProvider, $authProvider, $httpProvider, $provide) {
-        $urlRouterProvider.otherwise('/');
+        //$urlRouterProvider.otherwise('/');
 
         $stateProvider
             .state('jwtauth', {
@@ -49,7 +49,7 @@
                 }
             })
             .state('jwtauth.signin', {
-                url  : '/sign-in',
+                url  : '/signin',
                 data : { pageName: 'Sign-in' },
                 views: {
                     'main@jwtauth': {
@@ -71,13 +71,13 @@
                 }
             })*/
             .state('home', {
-                url: '/',
+                url: '/home',
                 controller: 'HomeCtrl',
-                templateUrl: 'partials/home.html'
+                templateUrl: view('jwt-auth.home')
             })
             .state('login', {
                 url: '/login',
-                templateUrl: 'partials/login.html',
+                templateUrl: view('jwt-auth.login'),
                 controller: 'LoginCtrl',
                 resolve: {
                     skipIfLoggedIn: skipIfLoggedIn
@@ -85,7 +85,7 @@
             })
             .state('signup', {
                 url: '/signup',
-                templateUrl: 'partials/signup.html',
+                templateUrl: view('jwt-auth.signup'),
                 controller: 'SignupCtrl',
                 resolve: {
                     skipIfLoggedIn: skipIfLoggedIn
@@ -98,7 +98,7 @@
             })
             .state('profile', {
                 url: '/profile',
-                templateUrl: 'partials/profile.html',
+                templateUrl: view('jwt-auth.profile'),
                 controller: 'ProfileCtrl',
                 resolve: {
                     loginRequired: loginRequired
