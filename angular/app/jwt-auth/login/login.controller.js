@@ -2,35 +2,26 @@
  * Created by anonymous on 08/12/15 16:23.
  */
 
-/*(function() {
+(function() {
     'use strict';
 
     angular
         .module('jwtAuth')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = [];
+    LoginController.$inject = ['$location', '$auth', 'toastr'];
 
-    /!* @ngInject *!/
-    function LoginController() {
-        var vm   = this;
-        vm.title = 'LoginController';
-
-        activate();
+    /* @ngInject */
+    function LoginController($location, $auth, toastr) {
+        var vm          = this;
+        vm.title        = 'LoginController';
+        vm.login        = login;
+        vm.authenticate = authenticate;
 
         ////////////////
 
-        function activate() {
-            //
-        }
-    }
-
-})();*/
-
-angular.module('jwtAuth')
-    .controller('LoginCtrl', function($scope, $location, $auth, toastr) {
-        $scope.login = function() {
-            $auth.login($scope.user)
+        function login() {
+            $auth.login(vm.user)
                 .then(function() {
                     toastr.success('You have successfully signed in!');
                     $location.path('/');
@@ -38,8 +29,10 @@ angular.module('jwtAuth')
                 .catch(function(error) {
                     toastr.error(error.data.message, error.status);
                 });
-        };
-        $scope.authenticate = function(provider) {
+
+        }
+
+        function authenticate(provider) {
             $auth.authenticate(provider)
                 .then(function() {
                     toastr.success('You have successfully signed in with ' + provider + '!');
@@ -56,5 +49,8 @@ angular.module('jwtAuth')
                         toastr.error(error);
                     }
                 });
-        };
-    });
+        }
+    }
+
+})();
+
