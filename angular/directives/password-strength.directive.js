@@ -6,31 +6,31 @@ angular.module('jwtAuth')
     .directive('passwordStrength', function() {
         return {
             restrict: 'A',
-            require: 'ngModel',
-            link: function(scope, element, attrs, ngModel) {
+            require : 'ngModel',
+            link    : function(scope, element, attrs, ngModel) {
                 var indicator = element.children();
-                var dots = Array.prototype.slice.call(indicator.children());
-                var weakest = dots.slice(-1)[0];
-                var weak = dots.slice(-2);
-                var strong = dots.slice(-3);
+                var dots      = Array.prototype.slice.call(indicator.children());
+                var weakest   = dots.slice(-1)[0];
+                var weak      = dots.slice(-2);
+                var strong    = dots.slice(-3);
                 var strongest = dots.slice(-4);
 
                 element.after(indicator);
 
                 element.bind('keyup', function() {
-                    var matches = {
+                    var matches  = {
                             positive: {},
                             negative: {}
                         },
-                        counts = {
+                        counts   = {
                             positive: {},
                             negative: {}
                         },
                         tmp,
                         strength = 0,
-                        letters = 'abcdefghijklmnopqrstuvwxyz',
-                        numbers = '01234567890',
-                        symbols = '\\!@#$%&/()=?¿',
+                        letters  = 'abcdefghijklmnopqrstuvwxyz',
+                        numbers  = '01234567890',
+                        symbols  = '\\!@#$%&/()=?¿',
                         strValue;
 
                     angular.forEach(dots, function(el) {
@@ -39,15 +39,15 @@ angular.module('jwtAuth')
 
                     if (ngModel.$viewValue) {
                         // Increase strength level
-                        matches.positive.lower = ngModel.$viewValue.match(/[a-z]/g);
-                        matches.positive.upper = ngModel.$viewValue.match(/[A-Z]/g);
-                        matches.positive.numbers = ngModel.$viewValue.match(/\d/g);
-                        matches.positive.symbols = ngModel.$viewValue.match(/[$-/:-?{-~!^_`\[\]]/g);
+                        matches.positive.lower        = ngModel.$viewValue.match(/[a-z]/g);
+                        matches.positive.upper        = ngModel.$viewValue.match(/[A-Z]/g);
+                        matches.positive.numbers      = ngModel.$viewValue.match(/\d/g);
+                        matches.positive.symbols      = ngModel.$viewValue.match(/[$-/:-?{-~!^_`\[\]]/g);
                         matches.positive.middleNumber = ngModel.$viewValue.slice(1, -1).match(/\d/g);
                         matches.positive.middleSymbol = ngModel.$viewValue.slice(1, -1).match(/[$-/:-?{-~!^_`\[\]]/g);
 
-                        counts.positive.lower = matches.positive.lower ? matches.positive.lower.length : 0;
-                        counts.positive.upper = matches.positive.upper ? matches.positive.upper.length : 0;
+                        counts.positive.lower   = matches.positive.lower ? matches.positive.lower.length : 0;
+                        counts.positive.upper   = matches.positive.upper ? matches.positive.upper.length : 0;
                         counts.positive.numbers = matches.positive.numbers ? matches.positive.numbers.length : 0;
                         counts.positive.symbols = matches.positive.symbols ? matches.positive.symbols.length : 0;
 
@@ -59,14 +59,14 @@ angular.module('jwtAuth')
                         counts.positive.middleSymbol = matches.positive.middleSymbol ? matches.positive.middleSymbol.length : 0;
 
                         // Decrease strength level
-                        matches.negative.consecLower = ngModel.$viewValue.match(/(?=([a-z]{2}))/g);
-                        matches.negative.consecUpper = ngModel.$viewValue.match(/(?=([A-Z]{2}))/g);
+                        matches.negative.consecLower   = ngModel.$viewValue.match(/(?=([a-z]{2}))/g);
+                        matches.negative.consecUpper   = ngModel.$viewValue.match(/(?=([A-Z]{2}))/g);
                         matches.negative.consecNumbers = ngModel.$viewValue.match(/(?=(\d{2}))/g);
-                        matches.negative.onlyNumbers = ngModel.$viewValue.match(/^[0-9]*$/g);
-                        matches.negative.onlyLetters = ngModel.$viewValue.match(/^([a-z]|[A-Z])*$/g);
+                        matches.negative.onlyNumbers   = ngModel.$viewValue.match(/^[0-9]*$/g);
+                        matches.negative.onlyLetters   = ngModel.$viewValue.match(/^([a-z]|[A-Z])*$/g);
 
-                        counts.negative.consecLower = matches.negative.consecLower ? matches.negative.consecLower.length : 0;
-                        counts.negative.consecUpper = matches.negative.consecUpper ? matches.negative.consecUpper.length : 0;
+                        counts.negative.consecLower   = matches.negative.consecLower ? matches.negative.consecLower.length : 0;
+                        counts.negative.consecUpper   = matches.negative.consecUpper ? matches.negative.consecUpper.length : 0;
                         counts.negative.consecNumbers = matches.negative.consecNumbers ? matches.negative.consecNumbers.length : 0;
 
                         // Calculations

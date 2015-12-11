@@ -6,10 +6,10 @@ angular.module('jwtAuth')
     .directive('passwordMatch', function() {
         return {
             require: 'ngModel',
-            scope: {
+            scope  : {
                 otherModelValue: '=passwordMatch'
             },
-            link: function(scope, element, attributes, ngModel) {
+            link   : function(scope, element, attributes, ngModel) {
                 ngModel.$validators.compareTo = function(modelValue) {
                     return modelValue === scope.otherModelValue;
                 };
