@@ -2,17 +2,17 @@
  * Created by anonymous on 08/12/15 10:48.
  */
 
-/*(function() {
+(function() {
     'use strict';
 
     angular
         .module('jwtAuth')
-        .factory('accountService', accountService);
+        .factory('Account', Account);
 
-    accountService.$inject = ['$http'];
+    Account.$inject = ['$http'];
 
-    /!* @ngInject *!/
-    function accountService($http) {
+    /* @ngInject */
+    function Account($http) {
         var service;
 
         service = {
@@ -33,16 +33,5 @@
         }
     }
 
-})();*/
+})();
 
-angular.module('jwtAuth')
-    .factory('Account', function($http) {
-        return {
-            getProfile: function() {
-                return $http.get('/api/me');
-            },
-            updateProfile: function(profileData) {
-                return $http.put('/api/me', profileData);
-            }
-        };
-    });
