@@ -7,14 +7,14 @@
 
     angular
         .module('jwtAuth')
-        .controller('SignupController', SignupController);
+        .controller('JwtAuthSignupController', JwtAuthSignupController);
 
-    SignupController.$inject = ['$location', '$auth', 'toastr'];
+    JwtAuthSignupController.$inject = ['$location', '$auth', 'toastr'];
 
     /* @ngInject */
-    function SignupController($location, $auth, toastr) {
+    function JwtAuthSignupController($location, $auth, toastr) {
         var vm    = this;
-        vm.title  = 'SignupController';
+        vm.title  = 'JwtAuthSignupController';
         vm.user;
         vm.signup = signup;
 

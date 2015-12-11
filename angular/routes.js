@@ -87,7 +87,7 @@
                 views  : {
                     'main@jwtauth': {
                         templateUrl : view('jwt-auth.login'),
-                        controller  : 'LoginController',
+                        controller  : 'JwtAuthLoginController',
                         controllerAs: 'login'
                     }
                 },
@@ -101,7 +101,7 @@
                 views  : {
                     'main@jwtauth': {
                         templateUrl : view('jwt-auth.signup'),
-                        controller  : 'SignupController',
+                        controller  : 'JwtAuthSignupController',
                         controllerAs: 'signup'
                     }
                 },
