@@ -109,18 +109,24 @@
                     skipIfLoggedIn: skipIfLoggedIn
                 }
             })
+            .state('jwtauth.profile', {
+                url        : '/profile',
+                data   : { pageName: 'Profile' },
+                views  : {
+                    'main@jwtauth': {
+                        templateUrl : view('jwt-auth.profile'),
+                        controller  : 'JwtAuthProfileController',
+                        controllerAs: 'profile'
+                    }
+                },
+                resolve    : {
+                    loginRequired: loginRequired
+                }
+            })
             .state('jwtauth.logout', {
                 url       : '/logout',
                 template  : null,
                 controller: 'LogoutCtrl'
-            })
-            .state('jwtauth.profile', {
-                url        : '/profile',
-                templateUrl: view('jwt-auth.profile'),
-                controller : 'ProfileCtrl',
-                resolve    : {
-                    loginRequired: loginRequired
-                }
             });
 
         $authProvider.facebook({
