@@ -71,15 +71,27 @@
              }
              })*/
             .state('jwtauth.home', {
-                url        : '/home',
-                controller : 'HomeCtrl',
-                templateUrl: view('jwt-auth.home')
+                url  : '/home',
+                data : { pageName: 'Home' },
+                views: {
+                    'main@jwtauth': {
+                        templateUrl : view('jwt-auth.home'),
+                        controller  : 'JwtAuthHomeController',
+                        controllerAs: 'home'
+                    }
+                }
             })
             .state('jwtauth.login', {
-                url        : '/login',
-                templateUrl: view('jwt-auth.login'),
-                controller : 'LoginCtrl',
-                resolve    : {
+                url    : '/login',
+                data   : { pageName: 'Log-in' },
+                views  : {
+                    'main@jwtauth': {
+                        templateUrl : view('jwt-auth.login'),
+                        controller  : 'LoginController',
+                        controllerAs: 'login'
+                    }
+                },
+                resolve: {
                     skipIfLoggedIn: skipIfLoggedIn
                 }
             })

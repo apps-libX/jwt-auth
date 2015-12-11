@@ -2,16 +2,16 @@
     <div layout="row" layout-wrap>
         <div flex="30" hide-sm hide-md></div>
         <div flex="auto">
-            <form method="post" ng-submit="login()" name="loginForm">
+            <form method="post" ng-submit="login.login()" name="loginForm">
                 <md-input-container>
                     <div class="form-group has-feedback">
-                        <input class="form-control input-lg" type="text" name="email" ng-model="user.email" placeholder="Email" required autofocus>
+                        <input class="form-control input-lg" type="text" name="email" ng-model="login.user.email" placeholder="Email" required autofocus>
                         <span class="ion-at form-control-feedback"></span>
                     </div>
                 </md-input-container>
                 <md-input-container>
                     <div class="form-group has-feedback">
-                        <input class="form-control input-lg" type="password" name="password" ng-model="user.password" placeholder="Password" required>
+                        <input class="form-control input-lg" type="password" name="password" ng-model="login.user.password" placeholder="Password" required>
                         <span class="ion-key form-control-feedback"></span>
                     </div>
                 </md-input-container>
