@@ -7,8 +7,8 @@ use Validator;
 use Illuminate\Http\Request;
 use GuzzleHttp;
 use GuzzleHttp\Subscriber\Oauth\Oauth1;
-use AppsLibX\JwtAuth\User;
 use Anwendungen\Application\Controller\Controller;
+use AppsLibX\JwtAuth\User;
 
 class AuthController extends Controller
 {
