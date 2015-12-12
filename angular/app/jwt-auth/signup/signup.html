@@ -1,5 +1,5 @@
 <md-content flex layout-padding>
-    <div layout="row" layout-wrap>
+    <div layout="row">
         <div flex="30" hide-sm hide-md></div>
         <div flex="auto">
             <form method="post" ng-submit="signup.signup()" name="signupForm" novalidate>
@@ -42,7 +42,7 @@
                     </small>
                 </p>
                 <div layout="row" layout-align="end center">
-                    <md-button type="submit" ng-click="" ng-disabled="signupForm.$invalid" class="md-raised md-primary md-hue-3">
+                    <md-button ng-click="" ng-disabled="signupForm.$invalid" class="md-raised md-primary md-hue-3">
                         Sign-up
                     </md-button>
                 </div>
