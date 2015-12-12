@@ -1,9 +1,9 @@
-<?php namespace App\Http\Controllers;
+<?php namespace AppsLibX\JwtAuth\Controllers;
 
 use Illuminate\Http\Request;
 use Config;
 use JWT;
-use App\User;
+use AppsLibX\JwtAuth\User;
 
 class UserController extends Controller
 {

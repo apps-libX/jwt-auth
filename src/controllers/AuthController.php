@@ -1,4 +1,4 @@
-<?php namespace App\Http\Controllers;
+<?php namespace AppsLibX\JwtAuth\Controllers;
 
 use JWT;
 use Hash;
@@ -7,7 +7,8 @@ use Validator;
 use Illuminate\Http\Request;
 use GuzzleHttp;
 use GuzzleHttp\Subscriber\Oauth\Oauth1;
-use App\User;
+use AppsLibX\JwtAuth\User;
+use Anwendungen\Application\Controller\Controller;
 
 class AuthController extends Controller
 {
