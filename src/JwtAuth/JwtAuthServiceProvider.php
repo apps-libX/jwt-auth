@@ -1,5 +1,6 @@
 <?php namespace AppsLibX\JwtAuth;
 
+use ReflectionClass;
 use Illuminate\Support\ServiceProvider;
 
 class JwtAuthServiceProvider extends ServiceProvider
@@ -19,6 +20,13 @@ class JwtAuthServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        // Find path to the package
+        $componenentsFileName = with(new ReflectionClass('\AppsLibX\JwtAuth\JwtAuthServiceProvider'))->getFileName();
+        $componenentsPath = dirname($componenentsFileName);
+
+        $this->loadViewsFrom($componenentsPath . '/../views', 'jwtauth');
+
+        include $componenentsPath . '/../routes.php';
 
     }
 
