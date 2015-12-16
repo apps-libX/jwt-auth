@@ -50,7 +50,7 @@
             })
             .state('jwtauth.signin', {
                 url  : '/signin',
-                data : { pageName: 'Sign-in' },
+                data : {pageName: 'Sign-in'},
                 views: {
                     'main@jwtauth': {
                         templateUrl : view('jwt-auth.signin'),
@@ -72,7 +72,7 @@
              })*/
             .state('jwtauth.home', {
                 url  : '/home',
-                data : { pageName: 'Home' },
+                data : {pageName: 'Home'},
                 views: {
                     'main@jwtauth': {
                         templateUrl : view('jwt-auth.home'),
@@ -83,7 +83,7 @@
             })
             .state('jwtauth.login', {
                 url    : '/login',
-                data   : { pageName: 'Log-in' },
+                data   : {pageName: 'Log-in'},
                 views  : {
                     'main@jwtauth': {
                         templateUrl : view('jwt-auth.login'),
@@ -97,7 +97,7 @@
             })
             .state('jwtauth.signup', {
                 url    : '/signup',
-                data   : { pageName: 'Sign-up' },
+                data   : {pageName: 'Sign-up'},
                 views  : {
                     'main@jwtauth': {
                         templateUrl : view('jwt-auth.signup'),
@@ -111,7 +111,7 @@
             })
             .state('jwtauth.profile', {
                 url        : '/profile',
-                data   : { pageName: 'Profile' },
+                data   : {pageName: 'Profile'},
                 views  : {
                     'main@jwtauth': {
                         templateUrl : view('jwt-auth.profile'),
@@ -197,8 +197,16 @@
             return deferred.promise;
         }
 
+        function dashboard(viewName) {
+            if (viewName !== '') {
+                return './views/dashboard/' + appName(viewName) + '/' + fileDir(viewName) + '/' + fileName(viewName) + '.html';
+            } else {
+                return './views/app/app/home/home.html';
+            }
+        }
+
         function view(viewName) {
-            if (viewName !== "") {
+            if (viewName !== '') {
                 return './views/app/' + appName(viewName) + '/' + fileDir(viewName) + '/' + fileName(viewName) + '.html';
             } else {
                 return './views/app/app/home/home.html';
@@ -206,26 +214,25 @@
         }
 
         function layout(viewName) {
-            if (viewName !== "") {
+            if (viewName !== '') {
                 return './views/layouts/' + appName(viewName) + '/' + fileDir(viewName) + '/' + fileName(viewName) + '.html';
             } else {
                 return './views/app/app/home/home.html';
             }
-
         }
 
         function appName(v) {
-            if (v.split(".")[0]) {
-                return v.split(".")[0];
+            if (v.split('.')[0]) {
+                return v.split('.')[0];
             } else {
                 return 'app';
             }
         }
 
         function fileDir(v) {
-            if (v.split(".")[1]) {
-                return v.split(".")[1];
-            } else if (!v.split(".")[0]) {
+            if (v.split('.')[1]) {
+                return v.split('.')[1];
+            } else if (!v.split('.')[0]) {
                 return v;
             } else {
                 return 'home';
@@ -233,16 +240,17 @@
         }
 
         function fileName(v) {
-            if (v.split(".")[2]) {
-                return v.split(".")[2];
-            } else if (!v.split(".")[2]) {
-                if (v.split(".")[1]) {
-                    return v.split(".")[1];
+            if (v.split('.')[2]) {
+                return v.split('.')[2];
+            } else if (!v.split('.')[2]) {
+                if (v.split('.')[1]) {
+                    return v.split('.')[1];
                 }
             } else {
                 return 'home';
             }
         }
+
     }
 
 })();
