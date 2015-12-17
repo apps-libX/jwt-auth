@@ -1,6 +1,6 @@
 <?php
 
-namespace Sentinel\FormRequests;
+namespace AppsLibX\Sentinel\FormRequests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
