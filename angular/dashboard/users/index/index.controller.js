@@ -1,5 +1,5 @@
 /**
- * Created by anonymous on 26/11/15 19:33.
+ * Created by anonymous on 16/12/15 14:35.
  */
 
 (function() {
@@ -7,14 +7,14 @@
 
     angular
         .module('jwtAuth')
-        .controller('JwtAuthFooterController', JwtAuthFooterController);
+        .controller('UserIndexController', UserIndexController);
 
-    JwtAuthFooterController.$inject = [];
+    UserIndexController.$inject = [];
 
     /* @ngInject */
-    function JwtAuthFooterController() {
+    function UserIndexController() {
         var vm   = this;
-        vm.title = 'JwtAuthFooterController';
+        vm.title = 'UserIndexController';
 
         activate();
 

@@ -1,6 +1,7 @@
 <?php namespace AppsLibX\JwtAuth;
 
 use ReflectionClass;
+use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
 
 class JwtAuthServiceProvider extends ServiceProvider
@@ -37,7 +38,13 @@ class JwtAuthServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->register(\Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class);
+
+        $loader = AliasLoader::getInstance();
+        $loader->alias('JWTAuth', \Tymon\JWTAuth\Facades\JWTAuth::class);
+        $loader->alias('JWTFactory', \Tymon\JWTAuth\Facades\JWTFactory::class);
+
+        $this->app->register(\Consigliere\AppFoundation\AppFoundationServiceProvider::class);
     }
 
     /**

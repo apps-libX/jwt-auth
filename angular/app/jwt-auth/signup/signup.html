@@ -2,12 +2,12 @@
     <div layout="row">
         <div flex="30" hide-sm hide-md></div>
         <div flex="auto">
-            <form method="post" ng-submit="signup.signup()" name="signupForm" novalidate>
+            <form name="signupForm" novalidate>
                 <md-input-container>
-                    <label for="displayName">Name</label>
-                    <input type="text" id="displayName" name="displayName" ng-model="signup.user.displayName" required>
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" ng-model="signup.user.username" required>
 
-                    <div ng-if="signupForm.displayName.$dirty" ng-messages="signupForm.displayName.$error">
+                    <div ng-if="signupForm.username.$dirty" ng-messages="signupForm.username.$error">
                         <div ng-message="required">You must enter your name.</div>
                     </div>
                 </md-input-container>
@@ -42,13 +42,13 @@
                     </small>
                 </p>
                 <div layout="row" layout-align="end center">
-                    <md-button ng-click="" ng-disabled="signupForm.$invalid" class="md-raised md-primary md-hue-3">
+                    <md-button ng-click="signup.signup()" ng-disabled="signupForm.$invalid" class="md-raised md-primary md-hue-3">
                         Sign-up
                     </md-button>
                 </div>
 
                 <p class="u-center">
-                    <small>Already have an account? <a ui-sref="jwtauth.login">Sign in</a></small>
+                    <small>Already have an account? <a ui-sref="jwtauth.signin">Sign in</a></small>
                 </p>
             </form>
         </div>

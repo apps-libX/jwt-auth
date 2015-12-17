@@ -1,13 +1,12 @@
 /**
- * Created by anonymous on 10/12/15 10:29.
+ * Created by anonymous on 04/12/15 9:11.
  */
 
-/*
 (function() {
     'use strict';
 
     angular.module('jwtAuth').run(function($rootScope, $state) {
-        $rootScope.$on("$stateChangeStart", function(event, toState) {
+        $rootScope.$on('$stateChangeStart', function(event, toState) {
             var user = JSON.parse(localStorage.getItem('user'));
             if (user) {
                 $rootScope.authenticated = true;
@@ -15,10 +14,10 @@
 
                 if ((toState.name === 'jwtauth.signin') || (toState.name === 'jwtauth.register')) {
                     event.preventDefault();
-                    $state.go('dashboard.home');
+                    $state.go('client.home');
                 }
             }
         });
     });
 })();
-*/
+

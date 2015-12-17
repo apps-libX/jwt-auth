@@ -1,5 +1,5 @@
 /**
- * Created by anonymous on 10/12/15 10:06.
+ * Created by anonymous on 26/11/15 19:55.
  */
 
 (function() {
@@ -9,31 +9,36 @@
         .module('jwtAuth')
         .controller('JwtAuthHomeController', JwtAuthHomeController);
 
-    JwtAuthHomeController.$inject = ['$http'];
+    JwtAuthHomeController.$inject = ['userData'];
 
     /* @ngInject */
-    function JwtAuthHomeController($http) {
-        var vm   = this;
-        vm.title = 'JwtAuthHomeController';
+    function JwtAuthHomeController(userData) {
+        var vm      = this;
+        vm.title    = 'JwtAuthHomeController';
+        vm.users;
+        vm.error;
+        vm.getUsers = getUsers;
 
         activate();
 
         ////////////////
 
         function activate() {
-            $http.jsonp('https://api.github.com/repos/sahat/satellizer?callback=JSON_CALLBACK')
-                .success(function(data) {
-                    if (data) {
-                        if (data.data.stargazers_count) {
-                            vm.stars = data.data.stargazers_count;
-                        }
-                        if (data.data.forks) {
-                            vm.forks = data.data.forks;
-                        }
-                        if (data.data.open_issues) {
-                            vm.issues = data.data.open_issues;
-                        }
-                    }
+            //
+        }
+
+        function getUsers() {
+            return userData.get()
+                .then(function(users) {
+                    vm.users = users;
+                    console.log('All ok');
+                    console.log(users);
+                    //return vm.users;
+                })
+                .catch(function(error) {
+                    vm.error = error;
+                    console.log('Error with status code', error.status);
+                    console.log(error);
                 });
         }
     }

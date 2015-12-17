@@ -1,5 +1,5 @@
 /**
- * Created by anonymous on 08/12/15 16:58.
+ * Created by anonymous on 08/12/15 17:00.
  */
 
 (function() {
@@ -8,7 +8,7 @@
     angular
         .module('jwtAuth', [
             /* Shared */
-            'main',
+            'appFoundation',
             'widgets'
         ]);
 

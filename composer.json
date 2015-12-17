@@ -1,11 +1,11 @@
 {
-  "name"             : "apps-libX/jwt_auth",
-  "description"      : "Description jwt_auth",
+  "name"             : "apps-libX/jwt-auth",
+  "description"      : "Description jwt-auth",
   "keywords"         : [
     "apps-libX",
-    "jwt_auth"
+    "jwt-auth"
   ],
-  "homepage"         : "https://github.com/apps-libX/jwt_auth",
+  "homepage"         : "https://github.com/apps-libX/jwt-auth",
   "license"          : "MIT",
   "authors"          : [
     {
@@ -16,16 +16,16 @@
     }
   ],
   "require"          : {
-    "php"                        : ">=5.5.9",
-    "illuminate/support"         : "5.1.*@dev",
-    "illuminate/contracts"       : "5.1.*@dev",
-    "firebase/php-jwt"           : "~2.0",
-    "guzzlehttp/guzzle"          : "5.2.0",
-    "guzzlehttp/oauth-subscriber": "0.2.0"
+    "php"                 : ">=5.5.9",
+    "illuminate/support"  : "5.1.*@dev",
+    "illuminate/contracts": "5.1.*@dev",
+    "tymon/jwt-auth"      : "0.5.*"
   },
   "require-dev"      : {
-    "phpunit/phpunit"   : "4.*",
-    "scrutinizer/ocular": "~1.1"
+    "fzaninotto/faker": "~1.4",
+    "mockery/mockery" : "0.9.*",
+    "phpunit/phpunit" : "~4.0",
+    "phpspec/phpspec" : "~2.1"
   },
   "autoload"         : {
     "classmap": [

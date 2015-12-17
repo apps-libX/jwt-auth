@@ -1,5 +1,5 @@
 /**
- * Created by anonymous on 08/12/15 11:20.
+ * Created by anonymous on 01/12/15 23:48.
  */
 
 (function() {
@@ -7,15 +7,61 @@
 
     angular
         .module('jwtAuth')
-        .config(config);
+        .config(jwtAuthRouter);
 
-    config.$inject = ['$stateProvider', '$urlRouterProvider', '$authProvider', '$httpProvider', '$provide'];
+    jwtAuthRouter.$inject = ['$stateProvider', '$urlRouterProvider','$authProvider', '$httpProvider', '$provide'];
 
     /* @ngInject */
-    function config($stateProvider, $urlRouterProvider, $authProvider, $httpProvider, $provide) {
+    function jwtAuthRouter($stateProvider, $urlRouterProvider, $authProvider, $httpProvider, $provide) {
+        $provide.factory('redirectWhenLoggedOut', redirectWhenLoggedOut);
+        $httpProvider.interceptors.push('redirectWhenLoggedOut');
         $urlRouterProvider.otherwise('/');
 
         $stateProvider
+            .state('dashboard.users', {
+                url  : '/users',
+                data : {pageName: 'Users'},
+                views: {
+                    'main@dashboard': {
+                        templateUrl : dashboard('users.index'),
+                        controller  : 'UserIndexController',
+                        controllerAs: 'index'
+                    }
+                }
+            })
+            .state('dashboard.users.create', {
+                url  : '/create',
+                data : {pageName: 'Create'},
+                views: {
+                    'main@dashboard': {
+                        templateUrl : dashboard('users.create'),
+                        controller  : 'UserCreateController',
+                        controllerAs: 'create'
+                    }
+                }
+            })
+            .state('dashboard.users.show', {
+                url  : '/show',
+                data : {pageName: 'Show'},
+                views: {
+                    'main@dashboard': {
+                        templateUrl : dashboard('users.show'),
+                        controller  : 'UserShowController',
+                        controllerAs: 'show'
+                    }
+                }
+            })
+            .state('dashboard.users.edit', {
+                url  : '/edit',
+                data : {pageName: 'Edit'},
+                views: {
+                    'main@dashboard': {
+                        templateUrl : dashboard('users.edit'),
+                        controller  : 'UserEditController',
+                        controllerAs: 'edit'
+                    }
+                }
+            })
             .state('jwtauth', {
                 abstract: true,
                 url     : '/auth',
@@ -48,9 +94,20 @@
                     'main@jwtauth'  : {}
                 }
             })
+            .state('jwtauth.signup', {
+                url  : '/signup',
+                data : {pageName: 'Sign-up'},
+                views: {
+                    'main@jwtauth': {
+                        templateUrl : view('jwt-auth.signup'),
+                        controller  : 'JwtAuthSignupController',
+                        controllerAs: 'signup'
+                    }
+                }
+            })
             .state('jwtauth.signin', {
                 url  : '/signin',
-                data : {pageName: 'Sign-in'},
+                data : {pageName: 'Sign in'},
                 views: {
                     'main@jwtauth': {
                         templateUrl : view('jwt-auth.signin'),
@@ -59,17 +116,6 @@
                     }
                 }
             })
-            /*.state('jwtauth.home', {
-             url  : '/home',
-             data : { pageName: 'Home' },
-             views: {
-             'main@jwtauth': {
-             templateUrl : view('jwt-auth.home'),
-             controller  : 'JwtAuthHomeController',
-             controllerAs: 'home'
-             }
-             }
-             })*/
             .state('jwtauth.home', {
                 url  : '/home',
                 data : {pageName: 'Home'},
@@ -79,123 +125,11 @@
                         controller  : 'JwtAuthHomeController',
                         controllerAs: 'home'
                     }
-                }
-            })
-            .state('jwtauth.login', {
-                url    : '/login',
-                data   : {pageName: 'Log-in'},
-                views  : {
-                    'main@jwtauth': {
-                        templateUrl : view('jwt-auth.login'),
-                        controller  : 'JwtAuthLoginController',
-                        controllerAs: 'login'
-                    }
-                },
-                resolve: {
-                    skipIfLoggedIn: skipIfLoggedIn
-                }
-            })
-            .state('jwtauth.signup', {
-                url    : '/signup',
-                data   : {pageName: 'Sign-up'},
-                views  : {
-                    'main@jwtauth': {
-                        templateUrl : view('jwt-auth.signup'),
-                        controller  : 'JwtAuthSignupController',
-                        controllerAs: 'signup'
-                    }
-                },
-                resolve: {
-                    skipIfLoggedIn: skipIfLoggedIn
-                }
-            })
-            .state('jwtauth.profile', {
-                url        : '/profile',
-                data   : {pageName: 'Profile'},
-                views  : {
-                    'main@jwtauth': {
-                        templateUrl : view('jwt-auth.profile'),
-                        controller  : 'JwtAuthProfileController',
-                        controllerAs: 'profile'
-                    }
                 },
                 resolve    : {
                     loginRequired: loginRequired
                 }
-            })
-            .state('jwtauth.logout', {
-                url       : '/logout',
-                template  : null,
-                controller: 'LogoutCtrl'
             });
-
-        $authProvider.facebook({
-            clientId: '657854390977827'
-        });
-
-        $authProvider.google({
-            clientId: '631036554609-v5hm2amv4pvico3asfi97f54sc51ji4o.apps.googleusercontent.com'
-        });
-
-        $authProvider.github({
-            clientId: '0ba2600b1dbdb756688b'
-        });
-
-        $authProvider.linkedin({
-            clientId: '77cw786yignpzj'
-        });
-
-        $authProvider.instagram({
-            clientId: '799d1f8ea0e44ac8b70e7f18fcacedd1'
-        });
-
-        $authProvider.yahoo({
-            clientId: 'dj0yJmk9SDVkM2RhNWJSc2ZBJmQ9WVdrOWIzVlFRMWxzTXpZbWNHbzlNQS0tJnM9Y29uc3VtZXJzZWNyZXQmeD0yYw--'
-        });
-
-        $authProvider.twitter({
-            url: '/auth/twitter'
-        });
-
-        $authProvider.live({
-            clientId: '000000004C12E68D'
-        });
-
-        $authProvider.twitch({
-            clientId: 'qhc3lft06xipnmndydcr3wau939a20z'
-        });
-
-        /*$authProvider.bitbucket({
-         clientId: '48UepjQDYaZFuMWaDj'
-         });*/
-
-        $authProvider.oauth2({
-            name                 : 'foursquare',
-            url                  : '/auth/foursquare',
-            clientId             : 'MTCEJ3NGW2PNNB31WOSBFDSAD4MTHYVAZ1UKIULXZ2CVFC2K',
-            redirectUri          : window.location.origin || window.location.protocol + '//' + window.location.host,
-            authorizationEndpoint: 'https://foursquare.com/oauth2/authenticate'
-        });
-
-        function skipIfLoggedIn($q, $auth) {
-            var deferred = $q.defer();
-            if ($auth.isAuthenticated()) {
-                deferred.reject();
-            } else {
-                deferred.resolve();
-            }
-            return deferred.promise;
-        }
-
-        function loginRequired($q, $location, $auth) {
-            var deferred = $q.defer();
-            if ($auth.isAuthenticated()) {
-                deferred.resolve();
-            } else {
-                $location.path('/login');
-            }
-            return deferred.promise;
-        }
 
         function dashboard(viewName) {
             if (viewName !== '') {
@@ -249,6 +183,48 @@
             } else {
                 return 'home';
             }
+        }
+
+        function redirectWhenLoggedOut($q, $injector) {
+
+            return {
+
+                responseError: function(rejection) {
+                    var
+                        $state           = $injector.get('$state'),
+                        rejectionReasons = ['token_not_provided', 'token_expired', 'token_absent', 'token_invalid'];
+
+                    angular.forEach(rejectionReasons, function(value, key) {
+
+                        if (rejection.data.error === value) {
+                            localStorage.removeItem('user');
+                            $state.go('jwtauth.signin');
+                        }
+                    });
+
+                    return $q.reject(rejection);
+                }
+            };
+        }
+
+        function skipIfLoggedIn($q, $auth) {
+            var deferred = $q.defer();
+            if ($auth.isAuthenticated()) {
+                deferred.reject();
+            } else {
+                deferred.resolve();
+            }
+            return deferred.promise;
+        }
+
+        function loginRequired($q, $location, $auth) {
+            var deferred = $q.defer();
+            if ($auth.isAuthenticated()) {
+                deferred.resolve();
+            } else {
+                $location.path('/auth/signin');
+            }
+            return deferred.promise;
         }
 
     }

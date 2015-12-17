@@ -1,5 +1,5 @@
 /**
- * Created by anonymous on 10/12/15 10:19.
+ * Created by anonymous on 02/12/15 5:49.
  */
 
 (function() {
@@ -19,15 +19,13 @@
         vm.loginErrorText;
         vm.login      = login;
 
-        /*
-         activate();
+        activate();
 
-         ////////////////
+        ////////////////
 
-         function activate() {
-         //
-         }
-         */
+        function activate() {
+            //
+        }
 
         function login() {
             var
