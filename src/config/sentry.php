@@ -95,7 +95,7 @@ return array(
         |
         */
 
-        'model' => 'JwtAuth\Models\Group',
+        'model' => 'Sentinel\Models\Group',
 
     ),
 
@@ -120,7 +120,7 @@ return array(
         |
         */
 
-        'model' => 'JwtAuth\Models\User',
+        'model' => 'Sentinel\Models\User',
 
         /*
         |--------------------------------------------------------------------------
