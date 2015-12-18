@@ -45,21 +45,7 @@ class JwtAuthServiceProvider extends ServiceProvider
         $loader->alias('JWTFactory', \Tymon\JWTAuth\Facades\JWTFactory::class);
 
         $this->app->register(\Consigliere\AppFoundation\AppFoundationServiceProvider::class);
-
-        // Bind the User Repository
-        $this->app->bind('Sentinel\Repositories\User\SentinelUserRepositoryInterface', function ($app) {
-            return new UserRepository(
-                $app['config'],
-                $app['events']
-            );
-        });
-
-        // Bind the Group Repository
-        $this->app->bind('Sentinel\Repositories\Group\SentinelGroupRepositoryInterface', function ($app) {
-            return new GroupRepository(
-                $app['events']
-            );
-        });
+        $this->app->register(\Sentinel\SentinelServiceProvider::class);
     }
 
     /**
