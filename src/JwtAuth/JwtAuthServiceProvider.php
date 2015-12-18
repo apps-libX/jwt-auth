@@ -28,7 +28,6 @@ class JwtAuthServiceProvider extends ServiceProvider
         $this->loadViewsFrom($componenentsPath . '/../views', 'jwtauth');
 
         include $componenentsPath . '/../routes.php';
-
     }
 
     /**
