@@ -1,6 +1,6 @@
 <?php
 
-namespace AppsLibX\Sentinel\FormRequests;
+namespace AppsLibX\JwtAuth\FormRequests;
 
 use Illuminate\Foundation\Http\FormRequest;
 

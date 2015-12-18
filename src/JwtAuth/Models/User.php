@@ -3,7 +3,7 @@
  * Created by anonymous on 05/12/15 9:10.
  */
 
-namespace AppsLibX\JwtAuth;
+namespace AppsLibX\JwtAuth\Models;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;

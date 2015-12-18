@@ -5,13 +5,15 @@
 
 namespace AppsLibX\JwtAuth\Controllers;
 
-//use Vinkla\Hashids\HashidsManager;
 use Anwendungen\Application\Controller\Controller;
-use AppsLibX\Sentinel\FormRequests\RegisterRequest;
-//use AppsLibX\Sentinel\FormRequests\EmailRequest;
-//use AppsLibX\Sentinel\FormRequests\ResetPasswordRequest;
-//use AppsLibX\Sentinel\Repositories\Group\SentinelGroupRepositoryInterface;
-//use AppsLibX\Sentinel\Repositories\User\SentinelUserRepositoryInterface;
+use Vinkla\Hashids\HashidsManager;
+use Illuminate\Routing\Controller as BaseController;
+use AppsLibX\JwtAuth\FormRequests\RegisterRequest;
+//use JwtAuth\FormRequests\EmailRequest;
+//use JwtAuth\FormRequests\ResetPasswordRequest;
+use JwtAuth\Repositories\Group\GroupRepositoryInterface;
+use JwtAuth\Repositories\User\UserRepositoryInterface;
+
 //use Sentry;
 //use View;
 //use Input;
@@ -24,8 +26,8 @@ use AppsLibX\Sentinel\FormRequests\RegisterRequest;
 class RegistrationController extends Controller
 {
     public function __construct(
-        SentinelUserRepositoryInterface $userRepository,
-        SentinelGroupRepositoryInterface $groupRepository,
+        UserRepositoryInterface $userRepository,
+        GroupRepositoryInterface $groupRepository,
         HashidsManager $hashids
     ) {
         $this->userRepository  = $userRepository;
