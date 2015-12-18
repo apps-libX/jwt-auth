@@ -23,7 +23,7 @@ class JwtAuthServiceProvider extends ServiceProvider
     {
         // Find path to the package
         $componenentsFileName = with(new ReflectionClass('\AppsLibX\JwtAuth\JwtAuthServiceProvider'))->getFileName();
-        $componenentsPath = dirname($componenentsFileName);
+        $componenentsPath     = dirname($componenentsFileName);
 
         $this->loadViewsFrom($componenentsPath . '/../views', 'jwtauth');
 
@@ -48,8 +48,7 @@ class JwtAuthServiceProvider extends ServiceProvider
 
         // Bind the User Repository
         $this->app->bind('Sentinel\Repositories\User\SentinelUserRepositoryInterface', function ($app) {
-            return new SentryUserRepository(
-                $app['sentry'],
+            return new UserRepository(
                 $app['config'],
                 $app['events']
             );
@@ -57,8 +56,7 @@ class JwtAuthServiceProvider extends ServiceProvider
 
         // Bind the Group Repository
         $this->app->bind('Sentinel\Repositories\Group\SentinelGroupRepositoryInterface', function ($app) {
-            return new SentryGroupRepository(
-                $app['sentry'],
+            return new GroupRepository(
                 $app['events']
             );
         });
