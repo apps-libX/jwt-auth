@@ -5,6 +5,7 @@
 
 namespace AppsLibX\JwtAuth\DataTransferObjects;
 
+
 class BaseResponse
 {
     protected $payload;

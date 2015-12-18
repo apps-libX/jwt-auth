@@ -5,6 +5,7 @@
 
 namespace AppsLibX\JwtAuth\DataTransferObjects;
 
+
 class ExceptionResponse extends BaseResponse
 {
     public function __construct($message, array $payload = null)
