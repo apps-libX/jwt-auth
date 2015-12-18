@@ -5,20 +5,20 @@
 
 namespace AppsLibX\JwtAuth\Controllers;
 
-use Vinkla\Hashids\HashidsManager;
+//use Vinkla\Hashids\HashidsManager;
 use Anwendungen\Application\Controller\Controller;
 use AppsLibX\Sentinel\FormRequests\RegisterRequest;
-use AppsLibX\Sentinel\FormRequests\EmailRequest;
-use AppsLibX\Sentinel\FormRequests\ResetPasswordRequest;
-use AppsLibX\Sentinel\Repositories\Group\SentinelGroupRepositoryInterface;
-use AppsLibX\Sentinel\Repositories\User\SentinelUserRepositoryInterface;
-use Sentry;
-use View;
-use Input;
-use Event;
-use Redirect;
-use Session;
-use Config;
+//use AppsLibX\Sentinel\FormRequests\EmailRequest;
+//use AppsLibX\Sentinel\FormRequests\ResetPasswordRequest;
+//use AppsLibX\Sentinel\Repositories\Group\SentinelGroupRepositoryInterface;
+//use AppsLibX\Sentinel\Repositories\User\SentinelUserRepositoryInterface;
+//use Sentry;
+//use View;
+//use Input;
+//use Event;
+//use Redirect;
+//use Session;
+//use Config;
 
 
 class RegistrationController extends Controller
@@ -28,9 +28,9 @@ class RegistrationController extends Controller
         SentinelGroupRepositoryInterface $groupRepository,
         HashidsManager $hashids
     ) {
-        $this->userRepository = $userRepository;
+        $this->userRepository  = $userRepository;
         $this->groupRepository = $groupRepository;
-        $this->hashids = $hashids;
+        $this->hashids         = $hashids;
     }
 
     public function register(RegisterRequest $request)
