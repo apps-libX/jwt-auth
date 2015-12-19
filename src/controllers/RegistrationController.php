@@ -7,9 +7,6 @@ namespace AppsLibX\JwtAuth\Controllers;
 
 use Vinkla\Hashids\HashidsManager;
 use AppsLibX\JwtAuth\FormRequests\RegisterRequest;
-
-//use Sentinel\FormRequests\EmailRequest;
-//use Sentinel\FormRequests\ResetPasswordRequest;
 use AppsLibX\JwtAuth\Repositories\Group\GroupRepositoryInterface;
 use AppsLibX\JwtAuth\Repositories\User\UserRepositoryInterface;
 use Sentry;
@@ -32,6 +29,8 @@ class RegistrationController extends Controller
         $this->userRepository  = $userRepository;
         $this->groupRepository = $groupRepository;
         $this->hashids         = $hashids;
+
+        $this->middleware('jwt.auth', ['except' => ['register']]);
     }
 
     public function register(RegisterRequest $request)
