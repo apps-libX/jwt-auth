@@ -7,7 +7,7 @@ $api = app('Dingo\Api\Routing\Router');
 
 $api->version('v1', function ($api) {
     $api->post('authenticate', 'AppsLibX\JwtAuth\Controllers\AuthenticateController@authenticate');
-    $api->post('auth/signup', 'AppsLibX\JwtAuth\Controllers\AuthenticateController@signup');
+    $api->post('auth/signup', ['as' => 'register.user', 'uses' => 'RegistrationController@register']);
 });
 
 // Protected with JWT
