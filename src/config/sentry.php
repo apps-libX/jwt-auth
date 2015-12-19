@@ -120,7 +120,7 @@ return array(
         |
         */
 
-        'model' => 'Sentinel\Models\User',
+        'model' => 'AppsLibX\JwtAuth\Models\User',
 
         /*
         |--------------------------------------------------------------------------
