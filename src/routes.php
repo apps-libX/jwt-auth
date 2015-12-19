@@ -16,4 +16,5 @@ $api->version('v1', ['middleware' => 'api.auth'], function ($api) {
     $api->get('authenticate/user', 'AppsLibX\JwtAuth\Controllers\AuthenticateController@getAuthenticatedUser');
 });
 
-//Route::post('/auth/signup', 'AppsLibX\JwtAuth\Controllers\AuthenticateController@signup');
+// Route::post('/auth/signup', 'AppsLibX\JwtAuth\Controllers\AuthenticateController@signup');
+// Route::post('register', ['as' => 'sentinel.register.user', 'uses' => 'RegistrationController@register']);
