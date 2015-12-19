@@ -6,9 +6,10 @@
 namespace AppsLibX\JwtAuth\Controllers;
 
 use Vinkla\Hashids\HashidsManager;
-use Sentinel\FormRequests\RegisterRequest;
-use Sentinel\FormRequests\EmailRequest;
-use Sentinel\FormRequests\ResetPasswordRequest;
+use AppsLibX\JwtAuth\FormRequests\RegisterRequest;
+
+//use Sentinel\FormRequests\EmailRequest;
+//use Sentinel\FormRequests\ResetPasswordRequest;
 use AppsLibX\JwtAuth\Repositories\Group\GroupRepositoryInterface;
 use AppsLibX\JwtAuth\Repositories\User\UserRepositoryInterface;
 use Sentry;
@@ -42,7 +43,7 @@ class RegistrationController extends Controller
         $result = $this->userRepository->store($data);
 
         // It worked!  Use config to determine where we should go.
-        return $this->redirectViaResponse('registration_complete', $result);
+        // return $this->redirectViaResponse('registration_complete', $result);
     }
 
 }
