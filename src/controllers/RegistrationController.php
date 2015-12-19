@@ -18,6 +18,13 @@ use Session;
 use Config;
 use Anwendungen\Application\Controller\Controller;
 
+//use Illuminate\Http\Request;
+use JWTAuth;
+use Tymon\JWTAuth\Exceptions\JWTException;
+use Hash;
+use AppsLibX\JwtAuth\Models\User;
+use Sentinel\DataTransferObjects\BaseResponse;
+
 
 class RegistrationController extends Controller
 {
@@ -44,21 +51,20 @@ class RegistrationController extends Controller
         // It worked!  Use config to determine where we should go.
         // return $this->redirectViaResponse('registration_complete', $result);
 
-        if ($result) {
-            $credentials = $request->only('email', 'password');
-            try {
-                // verify the credentials and create a token for the user
-                if (!$token = JWTAuth::attempt($credentials)) {
-                    return response()->json(['error' => 'invalid_credentials'], 401);
-                }
-            } catch (JWTException $e) {
-                // something went wrong
-                return response()->json(['error' => 'could_not_create_token'], 500);
+        $credentials = $request->only('email', 'password');
+        try {
+            // verify the credentials and create a token for the user
+            if (!$token = JWTAuth::attempt($credentials)) {
+                return response()->json(['error' => 'invalid_credentials'], 401);
             }
-
-            // if no errors are encountered we can return a JWT
-            return response()->json(compact('token', 'result'));
+        } catch (JWTException $e) {
+            // something went wrong
+            return response()->json(['error' => 'could_not_create_token'], 500);
         }
+
+        // if no errors are encountered we can return a JWT
+        return response()->json(compact('token'));
+
     }
 
 }

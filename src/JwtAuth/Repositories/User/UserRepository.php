@@ -14,7 +14,7 @@ class UserRepository extends SentryUserRepository implements UserRepositoryInter
 {
     public function store($data)
     {
-        parent::store();
+        parent::store($data);
     }
 }
 

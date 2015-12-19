@@ -5,7 +5,7 @@
 
 namespace AppsLibX\JwtAuth\Repositories\Group;
 
-use Sentinel\Repositories\Group;
+use Sentinel\Repositories\Group\SentryGroupRepository;
 
 class GroupRepository extends SentryGroupRepository implements GroupRepositoryInterface
 {

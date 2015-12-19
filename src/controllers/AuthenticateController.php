@@ -10,11 +10,7 @@ use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Hash;
 use Anwendungen\Application\Controller\Controller;
-use AppsLibX\JwtAuth\User;
-
-//use App\Http\Requests;
-//use App\Http\Controllers\Controller;
-//use App\User;
+use AppsLibX\JwtAuth\Models\User;
 
 /**
  * Class AuthenticateController
