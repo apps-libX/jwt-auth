@@ -5,18 +5,12 @@
 
 namespace AppsLibX\JwtAuth\Controllers;
 
-//use JwtAuth\Repositories\Group\GroupRepositoryInterface;
-//use JwtAuth\Repositories\User\UserRepositoryInterface;
 use Vinkla\Hashids\HashidsManager;
-//use Illuminate\Routing\Controller as BaseController;
 use Sentinel\FormRequests\RegisterRequest;
 use Sentinel\FormRequests\EmailRequest;
 use Sentinel\FormRequests\ResetPasswordRequest;
-use Sentinel\Repositories\Group\SentinelGroupRepositoryInterface;
-use Sentinel\Repositories\User\SentinelUserRepositoryInterface;
-
-// use Sentinel\Traits\SentinelRedirectionTrait;
-// use Sentinel\Traits\SentinelViewfinderTrait;
+use AppsLibX\JwtAuth\Repositories\Group\GroupRepositoryInterface;
+use AppsLibX\JwtAuth\Repositories\User\UserRepositoryInterface;
 use Sentry;
 use View;
 use Input;
