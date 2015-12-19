@@ -3,6 +3,8 @@
 use ReflectionClass;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
+use AppsLibX\JwtAuth\Repositories\Group\GroupRepository;
+use AppsLibX\JwtAuth\Repositories\User\UserRepository;
 
 class JwtAuthServiceProvider extends ServiceProvider
 {
