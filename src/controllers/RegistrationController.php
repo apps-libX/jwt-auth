@@ -5,22 +5,26 @@
 
 namespace AppsLibX\JwtAuth\Controllers;
 
-use Anwendungen\Application\Controller\Controller;
+//use JwtAuth\Repositories\Group\GroupRepositoryInterface;
+//use JwtAuth\Repositories\User\UserRepositoryInterface;
 use Vinkla\Hashids\HashidsManager;
-use Illuminate\Routing\Controller as BaseController;
-use AppsLibX\JwtAuth\FormRequests\RegisterRequest;
-//use JwtAuth\FormRequests\EmailRequest;
-//use JwtAuth\FormRequests\ResetPasswordRequest;
-use JwtAuth\Repositories\Group\GroupRepositoryInterface;
-use JwtAuth\Repositories\User\UserRepositoryInterface;
+//use Illuminate\Routing\Controller as BaseController;
+use Sentinel\FormRequests\RegisterRequest;
+use Sentinel\FormRequests\EmailRequest;
+use Sentinel\FormRequests\ResetPasswordRequest;
+use Sentinel\Repositories\Group\SentinelGroupRepositoryInterface;
+use Sentinel\Repositories\User\SentinelUserRepositoryInterface;
 
-//use Sentry;
-//use View;
-//use Input;
-//use Event;
-//use Redirect;
-//use Session;
-//use Config;
+// use Sentinel\Traits\SentinelRedirectionTrait;
+// use Sentinel\Traits\SentinelViewfinderTrait;
+use Sentry;
+use View;
+use Input;
+use Event;
+use Redirect;
+use Session;
+use Config;
+use Anwendungen\Application\Controller\Controller;
 
 
 class RegistrationController extends Controller
