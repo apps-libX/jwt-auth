@@ -7,7 +7,7 @@ namespace AppsLibX\JwtAuth\Repositories\User;
 
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Collection;
-use AppsLibX\JwtAuth\DataTransferObjects\BaseResponse;
+use Sentinel\DataTransferObjects\BaseResponse;
 use AppsLibX\JwtAuth\Models\User;
 
 interface UserRepositoryInterface
