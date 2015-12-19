@@ -3,7 +3,7 @@
  * Created by anonymous on 18/12/15 8:38.
  */
 
-namespace AppsLibX\JwtAuth;
+namespace AppsLibX\JwtAuth\Repositories\Group;
 
 use Sentinel\Repositories\Group;
 
