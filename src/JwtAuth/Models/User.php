@@ -5,38 +5,81 @@
 
 namespace AppsLibX\JwtAuth\Models;
 
-use Illuminate\Auth\Authenticatable;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Auth\Passwords\CanResetPassword;
-use Illuminate\Foundation\Auth\Access\Authorizable;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
-use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
-use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Hashids;
+use Illuminate\Contracts\Auth\Authenticatable as UserContract;
 
-class User extends Model implements AuthenticatableContract,
-                                    AuthorizableContract,
-                                    CanResetPasswordContract
+class User extends \Cartalyst\Sentry\Users\Eloquent\User implements UserContract
 {
-    use Authenticatable, Authorizable, CanResetPassword;
+    /**
+     * Set the Sentry User Model Hasher to be the same as the configured Sentry Hasher
+     */
+    public static function boot()
+    {
+        parent::boot();
+        static::setHasher(app()->make('sentry.hasher'));
+    }
 
     /**
-     * The database table used by the model.
+     * Get the unique identifier for the user.
      *
-     * @var string
+     * @return mixed
      */
-    protected $table = 'users';
+    public function getAuthIdentifier()
+    {
+        return $this->getKey();
+    }
 
     /**
-     * The attributes that are mass assignable.
+     * Get the password for the user.
      *
-     * @var array
+     * @return string
      */
-    protected $fillable = ['name', 'email', 'password'];
+    public function getAuthPassword()
+    {
+        return $this->password;
+    }
 
     /**
-     * The attributes excluded from the model's JSON form.
+     * Get the token value for the "remember me" session.
      *
-     * @var array
+     * @return string
      */
-    protected $hidden = ['password', 'remember_token'];
+    public function getRememberToken()
+    {
+        return $this->getPersistCode();
+    }
+
+    /**
+     * Set the token value for the "remember me" session.
+     *
+     * @param  string $value
+     *
+     * @return void
+     */
+    public function setRememberToken($value)
+    {
+        $this->persist_code = $value;
+
+        $this->save();
+    }
+
+    /**
+     * Get the column name for the "remember me" token.
+     *
+     * @return string
+     */
+    public function getRememberTokenName()
+    {
+        return "persist_code";
+    }
+
+    /**
+     * Use a mutator to derive the appropriate hash for this user
+     *
+     * @return mixed
+     */
+    public function getHashAttribute()
+    {
+        return Hashids::encode($this->attributes['id']);
+    }
 }
