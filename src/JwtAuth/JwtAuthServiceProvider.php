@@ -45,6 +45,23 @@ class JwtAuthServiceProvider extends ServiceProvider
 
         $this->app->register(\Consigliere\AppFoundation\AppFoundationServiceProvider::class);
         $this->app->register(\Sentinel\SentinelServiceProvider::class);
+
+        // Bind the User Repository
+        $this->app->bind('AppsLibX\JwtAuth\Repositories\User\UserRepositoryInterface', function ($app) {
+            return new UserRepository(
+                $app['sentry'],
+                $app['config'],
+                $app['events']
+            );
+        });
+
+        // Bind the Group Repository
+        $this->app->bind('AppsLibX\JwtAuth\Repositories\Group\GroupRepositoryInterface', function ($app) {
+            return new GroupRepository(
+                $app['sentry'],
+                $app['events']
+            );
+        });
     }
 
     /**
