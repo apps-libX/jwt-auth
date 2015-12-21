@@ -37,8 +37,6 @@ class AuthenticateController extends Controller
     {
         $users = User::all();
 
-        //return $users;
-
         return response()->json($users);
     }
 
