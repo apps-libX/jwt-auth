@@ -1,0 +1,80 @@
+<md-toolbar class="md-table-toolbar md-default" ng-show="!ctrl.selected.length">
+    <div class="md-toolbar-tools">
+        <span></span>
+        <span flex></span>
+        <md-button class="md-icon-button" ui-sref="dashboard.users.create">
+            <md-icon ng-md-icon icon="add" style="fill: black" size="24"></md-icon>
+            <md-tooltip md-direction="bottom">Add</md-tooltip>
+        </md-button>
+        <md-button class="md-icon-button" ng-click="ctrl.loadStuff()">
+            <md-icon ng-md-icon icon="refresh" style="fill: black" size="24"></md-icon>
+            <md-tooltip md-direction="bottom">Refresh</md-tooltip>
+        </md-button>
+    </div>
+</md-toolbar>
+
+<md-toolbar class="md-primary md-hue-1" ng-show="ctrl.selected.length">
+    <div class="md-toolbar-tools">
+        <span>{{ctrl.selected.length}} {{ctrl.selected.length > 1 ? 'items' : 'item'}} selected</span>
+        <span flex></span>
+        <span ng-if="ctrl.selected.length > 1">
+            <md-button class="md-icon-button" ng-click="ctrl.crush(ctrl.selected)">
+                <md-icon ng-md-icon icon="delete" style="fill: black" size="24"></md-icon>
+                <md-tooltip md-direction="bottom">Deletes</md-tooltip>
+            </md-button>
+        </span>
+        <span ng-if="ctrl.selected.length === 1">
+            <md-button class="md-icon-button" ui-sref="dashboard.users" ng-click="ctrl.destroy(ctrl.selected[0].id)">
+                <md-icon ng-md-icon icon="delete" style="fill: black" size="24"></md-icon>
+                <md-tooltip md-direction="bottom">Delete</md-tooltip>
+            </md-button>
+            <md-button class="md-icon-button" ui-sref="dashboard.users.edit({id : ctrl.selected[0].id})">
+                    <md-icon ng-md-icon icon="edit" style="fill: black" size="24"></md-icon>
+                    <md-tooltip md-direction="bottom">edit</md-tooltip>
+            </md-button>
+            <md-button class="md-icon-button" ui-sref="dashboard.users.show({id : ctrl.selected[0].id})">
+                    <md-icon ng-md-icon icon="details" style="fill: black" size="24"></md-icon>
+                    <md-tooltip md-direction="bottom">detail</md-tooltip>
+            </md-button>
+        </span>
+    </div>
+</md-toolbar>
+
+<md-table-container>
+    <table data-md-table data-md-row-select="!hideCheckboxes" data-ng-model="ctrl.selected" md-progress="ctrl.promise">
+        <thead md-head md-order="ctrl.query.order" md-on-reorder="ctrl.onReorder">
+        <tr md-row>
+            <th md-column ng-repeat="column in ctrl.columns" md-numeric="column.numeric" md-order-by="{{column.orderBy}}">
+                <span>{{column.name}}</span>
+                <span ng-if="column.unit">({{column.unit}})</span>
+            </th>
+        </tr>
+        </thead>
+        <!--
+        <thead ng-if="!hideHead" md-head md-order="ctrl.query.order" md-on-reorder="ctrl.onReorder">
+        <tr md-row>
+            <th md-column md:order:by="name"><span>Name</span></th>
+            <th md-column md:order:by="permissions"><span>Permissions</span></th>
+        </tr>
+        </thead>
+        -->
+        <tbody md-body>
+        <tr md-row md:select="list" data-md-on-select="ctrl.log" md-on-deselect="ctrl.deselect" x-md-auto-select="!autoSelect" ng-disabled="list.id === 1" data-ng-repeat="list in ctrl.lists | filter: filter.search | orderBy: ctrl.query.order | limitTo: ctrl.query.limit : (ctrl.query.page -1) * ctrl.query.limit">
+            <td md-cell>{{list.username}}</td>
+            <td md-cell>{{list.email}}</td>
+            <td md-cell>{{list.permissions}}</td>
+            <td md-cell>{{list.activated}}</td>
+            <td md-cell>{{list.status}}</td>
+        </tr>
+        </tbody>
+    </table>
+</md-table-container>
+
+<data-md-table-pagination md-limit="ctrl.query.limit" md-page="ctrl.query.page" md-total="{{ctrl.lists.length}}" md-on-paginate="ctrl.onPaginate" md-page-select></data-md-table-pagination>
+
+<md-divider></md-divider>
+
+<pre style="height:200px;scroll:auto;"><code>{{ctrl.lists | json: 2}}</code></pre>
+<!--
+<pre style="height:200px;scroll:auto;"><code>{{ctrl.selected | json: 2}}</code></pre>
+-->

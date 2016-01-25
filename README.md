@@ -17,14 +17,14 @@ PSRs you support to avoid any confusion with users and contributors.
 Via Composer
 
 ``` bash
-$ composer require apps-libX/jwt-auth
+$ composer require onderdelen/jwt-auth
 ```
 
 ## Usage
 
 ``` php
-$jwt_auth = new AppsLibX\JwtAuth();
-echo $jwt_auth->echoPhrase('Hello, apps-libX!');
+$jwt_auth = new Onderdelen\JwtAuth();
+echo $jwt_auth->echoPhrase('Hello, onderdelen!');
 ```
 
 ## Change log
@@ -54,17 +54,17 @@ If you discover any security related issues, please email 50c5ac69@opayq.com ins
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/apps-libX/jwt-auth.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/onderdelen/jwt-auth.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/apps-libX/jwt-auth/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/apps-libX/jwt-auth.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/apps-libX/jwt-auth.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/apps-libX/jwt-auth.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/onderdelen/jwt-auth/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/onderdelen/jwt-auth.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/onderdelen/jwt-auth.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/onderdelen/jwt-auth.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/apps-libX/jwt-auth
-[link-travis]: https://travis-ci.org/apps-libX/jwt-auth
-[link-scrutinizer]: https://scrutinizer-ci.com/g/apps-libX/jwt-auth/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/apps-libX/jwt-auth
-[link-downloads]: https://packagist.org/packages/apps-libX/jwt-auth
-[link-author]: https://github.com/apps-libX
+[link-packagist]: https://packagist.org/packages/onderdelen/jwt-auth
+[link-travis]: https://travis-ci.org/onderdelen/jwt-auth
+[link-scrutinizer]: https://scrutinizer-ci.com/g/onderdelen/jwt-auth/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/onderdelen/jwt-auth
+[link-downloads]: https://packagist.org/packages/onderdelen/jwt-auth
+[link-author]: https://github.com/onderdelen
 [link-contributors]: ../../contributors

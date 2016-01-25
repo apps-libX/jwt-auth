@@ -1,32 +1,45 @@
 <?php
 /**
+ * AuthenticateController.php
  * Created by anonymous on 05/12/15 9:00.
  */
 
-namespace AppsLibX\JwtAuth\Controllers;
+namespace Onderdelen\JwtAuth\Controllers;
 
-use Illuminate\Http\Request;
-use JWTAuth;
+use Consigliere\AppFoundation\Controller\Controller;
+use Illuminate\Support\Facades\Response;
+use Onderdelen\JwtAuth\FormRequests\LoginRequest;
+use Onderdelen\JwtAuth\Repositories\Authenticate\AuthenticateRepositoryInterface;
+use Cerberus\Traits\CerberusRedirectionTrait;
+use Cerberus\Traits\CerberusViewfinderTrait;
+use Onderdelen\JwtAuth\Models\User;
 use Tymon\JWTAuth\Exceptions\JWTException;
-use Hash;
-use Anwendungen\Application\Controller\Controller;
-use AppsLibX\JwtAuth\Models\User;
+use JWTAuth;
+use Sentry;
+use View;
+use Input;
+use Event;
+use Redirect;
+use Session;
+use Config;
 
 /**
  * Class AuthenticateController
- *
- * @package AppsLibX\JwtAuth\Controllers
+ * @package Onderdelen\JwtAuth\Controllers
  */
 class AuthenticateController extends Controller
 {
+    use CerberusRedirectionTrait;
+    use CerberusViewfinderTrait;
+
     /**
-     * construct
+     * Constructor
      */
-    public function __construct()
+    public function __construct(AuthenticateRepositoryInterface $authenticateManager)
     {
+        $this->authenticateManager = $authenticateManager;
         $this->middleware('jwt.auth', ['except' => ['authenticate', 'signup']]);
     }
-
 
     /**
      * Return the user
@@ -37,9 +50,8 @@ class AuthenticateController extends Controller
     {
         $users = User::all();
 
-        return response()->json($users);
+        return response()->success($users);
     }
-
 
     /**
      * Return a JWT
@@ -47,21 +59,33 @@ class AuthenticateController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function authenticate(Request $request)
+    public function authenticate(LoginRequest $request)
     {
-        $credentials = $request->only('email', 'password');
-        try {
-            // verify the credentials and create a token for the user
-            if (!$token = JWTAuth::attempt($credentials)) {
-                return response()->json(['error' => 'invalid_credentials'], 401);
-            }
-        } catch (JWTException $e) {
-            // something went wrong
-            return response()->json(['error' => 'could_not_create_token'], 500);
-        }
+        // Gather the input
+        // $data = Input::all();
+        $data = $request->all();
 
-        // if no errors are encountered we can return a JWT
-        return response()->json(compact('token'));
+        // Attempt the login
+        $result = $this->authenticateManager->store($data);
+
+        // Did it work?
+        if ($result->isSuccessful()) {
+            $credentials = $request->only('email', 'password');
+            try {
+                // verify the credentials and create a token for the user
+                if (!$token = JWTAuth::attempt($credentials)) {
+                    return response()->json(['error' => 'invalid_credentials'], 401);
+                }
+            } catch (JWTException $e) {
+                // something went wrong
+                return response()->json(['error' => 'could_not_create_token'], 500);
+            }
+
+            // if no errors are encountered we can return a JWT
+            return response()->json(compact('token'));
+        } else {
+            return response()->error($result->getMessage(), 400);
+        }
     }
 
     /**
@@ -88,41 +112,65 @@ class AuthenticateController extends Controller
     }
 
     /**
-     * Create Email and Password Account.
+     * Show the login form
      */
-    public function signup(Request $request)
+    public function create()
     {
-        /*$validator = Validator::make($request->all(), [
-            'username' => 'required',
-            'email' => 'required|email|unique:email',
-            'password' => 'required'
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json(['message' => $validator->messages()], 400);
-        }*/
-
-        $user        = new User;
-        $user->name  = $request->input('username');
-        $user->email = $request->input('email');
-        //$user->password = Crypt::encrypt($request->input('password'));
-        $user->password = Hash::make($request->input('password'));
-        $user->save();
-
-        //return response()->json(['token' => $this->createToken($user)]);
-
-        $credentials = $request->only('email', 'password');
-        try {
-            // verify the credentials and create a token for the user
-            if (!$token = JWTAuth::attempt($credentials)) {
-                return response()->json(['error' => 'invalid_credentials'], 401);
-            }
-        } catch (JWTException $e) {
-            // something went wrong
-            return response()->json(['error' => 'could_not_create_token'], 500);
+        // Is this user already signed in?
+        if (Sentry::check()) {
+            return $this->redirectTo('session_store');
         }
 
-        // if no errors are encountered we can return a JWT
-        return response()->json(compact('token'));
+        // No - they are not signed in.  Show the login form.
+        return $this->viewFinder('Cerberus::sessions.login');
+    }
+
+    /**
+     * Attempt authenticate a user.
+     *
+     * @return Response
+     */
+    public function store(LoginRequest $request)
+    {
+        // Gather the input
+        $data = Input::all();
+
+        // Attempt the login
+        $result = $this->session->store($data);
+
+        // Did it work?
+        if ($result->isSuccessful()) {
+            // Login was successful.  Determine where we should go now.
+            if (!config('cerberus.views_enabled')) {
+                // Views are disabled - return json instead
+                return Response::json('success', 200);
+            }
+            // Views are enabled, so go to the determined route
+            $redirect_route = config('cerberus.routing.session_store');
+
+            return Redirect::intended($this->generateUrl($redirect_route));
+        } else {
+            // There was a problem - unrelated to Form validation.
+            if (!config('cerberus.views_enabled')) {
+                // Views are disabled - return json instead
+                return Response::json($result->getMessage(), 400);
+            }
+            Session::flash('error', $result->getMessage());
+
+            return Redirect::route('cerberus.session.create')
+                ->withInput();
+        }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @return Response
+     */
+    public function destroy()
+    {
+        $this->session->destroy();
+
+        return $this->redirectTo('session_destroy');
     }
 }

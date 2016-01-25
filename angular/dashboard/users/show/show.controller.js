@@ -1,4 +1,5 @@
 /**
+ * show.controller.js
  * Created by anonymous on 16/12/15 14:38.
  */
 
@@ -7,14 +8,14 @@
 
     angular
         .module('jwtAuth')
-        .controller('UserShowController', UserShowController);
+        .controller('UsersShowController', UsersShowController);
 
-    UserShowController.$inject = [];
+    UsersShowController.$inject = ['$stateParams', 'Users'];
 
     /* @ngInject */
-    function UserShowController() {
-        var vm   = this;
-        vm.title = 'UserShowController';
+    function UsersShowController($stateParams, Users) {
+        var vm  = this;
+        vm.data = {id: $stateParams.id};
 
         activate();
 

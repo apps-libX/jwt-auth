@@ -1,4 +1,5 @@
 /**
+ * edit.controller.js
  * Created by anonymous on 16/12/15 14:30.
  */
 
@@ -7,14 +8,14 @@
 
     angular
         .module('jwtAuth')
-        .controller('UserEditController', UserEditController);
+        .controller('UsersEditController', UsersEditController);
 
-    UserEditController.$inject = [];
+    UsersEditController.$inject = ['$stateParams', 'Users'];
 
     /* @ngInject */
-    function UserEditController() {
-        var vm   = this;
-        vm.title = 'UserEditController';
+    function UsersEditController($stateParams, Users) {
+        var vm  = this;
+        vm.data = {id: $stateParams.id};
 
         activate();
 

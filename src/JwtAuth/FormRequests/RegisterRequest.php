@@ -1,6 +1,10 @@
 <?php
+/**
+ * RegisterRequest.php
+ * Created by anonymous on 01/01/16 2:42.
+ */
 
-namespace AppsLibX\JwtAuth\FormRequests;
+namespace Onderdelen\JwtAuth\FormRequests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -31,7 +35,7 @@ class RegisterRequest extends FormRequest
         ];
 
         // If Usernames are enabled, add username validation rules
-        if (config('sentinel.allow_usernames')) {
+        if (config('cerberus.allow_usernames')) {
             $rules['username'] = 'required|unique:users,username';
         }
 

@@ -1,26 +1,25 @@
 {
-  "name"             : "apps-libX/jwt-auth",
+  "name"             : "onderdelen/jwt-auth",
   "description"      : "Description jwt-auth",
   "keywords"         : [
-    "apps-libX",
+    "onderdelen",
     "jwt-auth"
   ],
-  "homepage"         : "https://github.com/apps-libX/jwt-auth",
+  "homepage"         : "https://github.com/onderdelen/jwt-auth",
   "license"          : "MIT",
   "authors"          : [
     {
       "name"    : "anonymoussc",
       "email"   : "50c5ac69@opayq.com",
-      "homepage": "https://github.com/apps-libX/",
+      "homepage": "https://github.com/onderdelen",
       "role"    : "Developer"
     }
   ],
   "require"          : {
     "php"                 : ">=5.5.9",
-    "illuminate/support"  : "5.1.*@dev",
-    "illuminate/contracts": "5.1.*@dev",
-    "tymon/jwt-auth"      : "0.5.*",
-    "rydurham/sentinel"   : "~2.2"
+    "illuminate/support"  : "5.1.*",
+    "illuminate/contracts": "5.1.*",
+    "tymon/jwt-auth"      : "0.5.*"
   },
   "require-dev"      : {
     "fzaninotto/faker": "~1.4",
@@ -35,12 +34,12 @@
       "tests"
     ],
     "psr-4"   : {
-      "AppsLibX\\JwtAuth\\": "src"
+      "Onderdelen\\JwtAuth\\": "src"
     }
   },
   "autoload-dev"     : {
     "psr-4": {
-      "AppsLibX\\JwtAuth\\Test\\": "tests"
+      "Onderdelen\\JwtAuth\\Test\\": "tests"
     }
   },
   "minimum-stability": "stable"

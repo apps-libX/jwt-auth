@@ -1,14 +1,16 @@
-<?php namespace AppsLibX\JwtAuth;
+<?php
+
+namespace Onderdelen\JwtAuth;
 
 use ReflectionClass;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
-use AppsLibX\JwtAuth\Repositories\Group\GroupRepository;
-use AppsLibX\JwtAuth\Repositories\User\UserRepository;
+use Onderdelen\JwtAuth\Repositories\Group\JwtAuthGroupRepository;
+use Onderdelen\JwtAuth\Repositories\User\JwtAuthUserRepository;
+use Onderdelen\JwtAuth\Repositories\Authenticate\AuthenticateRepository;
 
 class JwtAuthServiceProvider extends ServiceProvider
 {
-
     /**
      * Indicates if loading of the provider is deferred.
      *
@@ -24,12 +26,13 @@ class JwtAuthServiceProvider extends ServiceProvider
     public function boot()
     {
         // Find path to the package
-        $componenentsFileName = with(new ReflectionClass('\AppsLibX\JwtAuth\JwtAuthServiceProvider'))->getFileName();
+        $componenentsFileName = with(new ReflectionClass('\Onderdelen\JwtAuth\JwtAuthServiceProvider'))->getFileName();
         $componenentsPath     = dirname($componenentsFileName);
 
         $this->loadViewsFrom($componenentsPath . '/../views', 'jwtauth');
 
         include $componenentsPath . '/../routes.php';
+
     }
 
     /**
@@ -46,11 +49,11 @@ class JwtAuthServiceProvider extends ServiceProvider
         $loader->alias('JWTFactory', \Tymon\JWTAuth\Facades\JWTFactory::class);
 
         $this->app->register(\Consigliere\AppFoundation\AppFoundationServiceProvider::class);
-        $this->app->register(\Sentinel\SentinelServiceProvider::class);
+        $this->app->register(\Cerberus\CerberusServiceProvider::class);
 
         // Bind the User Repository
-        $this->app->bind('AppsLibX\JwtAuth\Repositories\User\UserRepositoryInterface', function ($app) {
-            return new UserRepository(
+        $this->app->bind('Onderdelen\JwtAuth\Repositories\User\UserRepositoryInterface', function ($app) {
+            return new JwtAuthUserRepository(
                 $app['sentry'],
                 $app['config'],
                 $app['events']
@@ -58,12 +61,21 @@ class JwtAuthServiceProvider extends ServiceProvider
         });
 
         // Bind the Group Repository
-        $this->app->bind('AppsLibX\JwtAuth\Repositories\Group\GroupRepositoryInterface', function ($app) {
-            return new GroupRepository(
+        $this->app->bind('Onderdelen\JwtAuth\Repositories\Group\GroupRepositoryInterface', function ($app) {
+            return new JwtAuthGroupRepository(
                 $app['sentry'],
                 $app['events']
             );
         });
+
+        // Bind the Authenticate Repository
+        $this->app->bind('Onderdelen\JwtAuth\Repositories\Authenticate\AuthenticateRepositoryInterface',
+            function ($app) {
+                return new AuthenticateRepository(
+                    $app['sentry'],
+                    $app['events']
+                );
+            });
     }
 
     /**

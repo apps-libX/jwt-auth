@@ -10,7 +10,7 @@
          processIsolation="false"
          stopOnFailure="false">
     <testsuites>
-        <testsuite name="apps-libX Test Suite">
+        <testsuite name="JwtAuth Test Suite">
             <directory>tests</directory>
         </testsuite>
     </testsuites>

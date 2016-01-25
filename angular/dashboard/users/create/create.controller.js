@@ -1,4 +1,5 @@
 /**
+ * create.controller.js
  * Created by anonymous on 16/12/15 14:12.
  */
 
@@ -7,14 +8,13 @@
 
     angular
         .module('jwtAuth')
-        .controller('UserCreateController', UserCreateController);
+        .controller('UsersCreateController', UsersCreateController);
 
-    UserCreateController.$inject = [];
+    UsersCreateController.$inject = [];
 
     /* @ngInject */
-    function UserCreateController() {
-        var vm   = this;
-        vm.title = 'UserCreateController';
+    function UsersCreateController() {
+        var vm = this;
 
         activate();
 
